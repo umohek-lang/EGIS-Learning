@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Resend Verification | EGIS Learning</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f7f5;
+            padding: 30px;
+            margin: 0;
+        }
+
+        main {
+            max-width: 460px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        h1 {
+            color: #126b45;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5d0;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 13px;
+            border: 0;
+            border-radius: 7px;
+            background: #126b45;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a {
+            color: #126b45;
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <h1>Resend verification email</h1>
+
+    <p>
+        Enter your email address. We will send another verification
+        link if your account requires verification.
+    </p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <!-- Preserve the original course destination -->
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <label for="email">Email address</label>
+
+        <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            required
+        >
+
+        <button type="submit">
+            Send verification link
+        </button>
+
+    </form>
+
+    <p>
+        <a href="{% url 'login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+            Back to login
+        </a>
+    </p>
+
+</main>
+
+</body>
+</html>

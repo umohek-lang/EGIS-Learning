@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Dashboard | EGIS Learning</title>
+    <style>
+        body { margin:0; font-family:Arial,sans-serif; background:#f5f7fa; color:#172033; }
+        header { background:#103c2c; color:white; padding:22px 6%; display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap; }
+        main { padding:35px 6%; }
+        .panel { background:white; padding:24px; border-radius:12px; margin-bottom:25px; border:1px solid #e5e9ef; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; }
+        .course { background:white; padding:20px; border:1px solid #e5e9ef; border-radius:12px; }
+        .button { background:#126b45; color:white; padding:10px 14px; display:inline-block; border:0; border-radius:7px; cursor:pointer; }
+        a { color:#126b45; text-decoration:none; }
+        header a { color:white; }
+        .muted { color:#657087; }
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <strong>EGIS LEARNING</strong><br>
+        Student Dashboard
+    </div>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="button" type="submit">Log Out</button>
+    </form>
+</header>
+
+<main>
+    <h1>Welcome, {{ request.user.first_name|default:request.user.username }}!</h1>
+    <p class="muted">Manage your learning and explore available courses.</p>
+
+    <section class="panel">
+        <h2>Your Subscription</h2>
+
+        {% for subscription in active_subscriptions %}
+            <p><strong>{{ subscription.plan.name }}</strong></p>
+            <p>Expires: {{ subscription.ends_at|date:"d M Y, H:i" }}</p>
+        {% empty %}
+            <p>You do not have an active subscription yet.</p>
+            <p>Choose a subscription plan to unlock full course lessons.</p>
+            <p><a class="button" href="{% url 'training_list' %}">Browse Available Courses</a></p>
+        {% endfor %}
+    </section>
+
+    <h2>Explore Courses</h2>
+
+    <div class="grid">
+        {% for course in courses %}
+            <article class="course">
+                <p class="muted">{{ course.category.name }} · {{ course.get_level_display }}</p>
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.description|truncatewords:20 }}</p>
+                <a href="{% url 'course_detail' course.slug %}">View Course →</a>
+            </article>
+        {% empty %}
+            <p>No published courses are available yet.</p>
+        {% endfor %}
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Account | EGIS Learning</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f7f5;
+            color: #172033;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 45px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px #102f2412;
+        }
+
+        h1 {
+            color: #126b45;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5d0;
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 13px;
+            border: 0;
+            border-radius: 7px;
+            background: #126b45;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .errorlist {
+            color: #b42318;
+        }
+
+        .helptext {
+            color: #657087;
+            font-size: 13px;
+        }
+
+        a {
+            color: #126b45;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Create your account</h1>
+
+    <p>Join EGIS Learning and start developing new skills.</p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <!-- Preserve the student's original destination -->
+        <input type="hidden" name="next" value="{{ next }}">
+
+        {% for field in form %}
+
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
+
+            {{ field }}
+
+            {% if field.help_text %}
+                <div class="helptext">
+                    {{ field.help_text|safe }}
+                </div>
+            {% endif %}
+
+            {% for error in field.errors %}
+                <p style="color:#b42318;">{{ error }}</p>
+            {% endfor %}
+
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+            {{ form.non_field_errors }}
+        {% endif %}
+
+        <button type="submit">Create Account</button>
+
+    </form>
+
+    <p>
+        Already registered?
+        <a href="{% url 'login' %}?next={{ next|urlencode }}">
+            Log in
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'home' %}">Return to homepage</a>
+    </p>
+
+</div>
+
+</body>
+</html>

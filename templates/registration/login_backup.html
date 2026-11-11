@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Login | EGIS Learning</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f7f5;
+            color: #172033;
+        }
+
+        .container {
+            max-width: 430px;
+            margin: 70px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px #102f2412;
+        }
+
+        h1 {
+            color: #126b45;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5d0;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 13px;
+            border: 0;
+            border-radius: 7px;
+            background: #126b45;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a {
+            color: #126b45;
+        }
+
+        .error {
+            color: #b42318;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Welcome back</h1>
+
+    <p>Log in to your EGIS Learning account.</p>
+
+    {% if form.non_field_errors %}
+        <div class="error">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p class="error">
+                You do not have permission to access that page.
+            </p>
+        {% else %}
+            <p>Please log in to continue.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <label for="{{ form.username.id_for_label }}">
+            Username
+        </label>
+
+        {{ form.username }}
+
+        <label for="{{ form.password.id_for_label }}">
+            Password
+        </label>
+
+        {{ form.password }}
+
+        <!-- Preserve original destination -->
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <button type="submit">
+            Log In
+        </button>
+
+    </form>
+
+    <p>
+        Don't have an account?
+        <a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+            Create a new account
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'home' %}">Return to homepage</a>
+    </p>
+
+</div>
+
+</body>
+</html>

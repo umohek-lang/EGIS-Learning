@@ -1,0 +1,223 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ advertisement.title }} | EGIS Learning</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        body {
+            background: #f3f8fc;
+            font-family: Arial, sans-serif;
+            color: #263746;
+        }
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e5edf5;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 800;
+            color: #1685c5;
+        }
+
+        .advertisement-container {
+            max-width: 950px;
+            margin: 60px auto;
+        }
+
+        .advertisement-card {
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 35px rgba(0,0,0,0.07);
+        }
+
+        .advertisement-image {
+            width: 100%;
+            max-height: 480px;
+            object-fit: cover;
+        }
+
+        .advertisement-content {
+            padding: 40px;
+        }
+
+        .badge-featured {
+            background: #e4f3fc;
+            color: #0877b5;
+            padding: 9px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .advertisement-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-top: 20px;
+            color: #173b57;
+        }
+
+        .advertisement-description {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #64748b;
+            margin-top: 20px;
+        }
+
+        .btn-egis {
+            background: #1685c5;
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 13px 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn-egis:hover {
+            background: #08699f;
+            color: #ffffff;
+        }
+
+        .back-link {
+            color: #1685c5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #8493a3;
+        }
+
+        @media(max-width: 600px) {
+
+            .advertisement-content {
+                padding: 25px;
+            }
+
+            .advertisement-title {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container">
+
+        <a href="http://localhost:5173/" class="brand text-decoration-none">
+            EGIS LEARNING
+        </a>
+
+        <a href="http://localhost:5173/" class="back-link">
+            ← Back to Homepage
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container advertisement-container">
+
+    <div class="advertisement-card">
+
+        {% if advertisement.image %}
+
+            <img
+                src="{{ advertisement.image.url }}"
+                alt="{{ advertisement.title }}"
+                class="advertisement-image"
+            >
+
+        {% endif %}
+
+
+        <div class="advertisement-content">
+
+            <span class="badge-featured">
+                FEATURED ANNOUNCEMENT
+            </span>
+
+
+            <h1 class="advertisement-title">
+                {{ advertisement.title }}
+            </h1>
+
+
+            <div class="advertisement-description">
+
+                {{ advertisement.description|linebreaks }}
+
+            </div>
+
+
+    {% if advertisement.category %}
+
+    <a
+        href="{% url 'category_courses' advertisement.category.slug %}"
+        class="btn-egis mt-3"
+    >
+        Explore This Category →
+    </a>
+
+{% else %}
+
+    <a
+        href="{% url 'training_list' %}"
+        class="btn-egis mt-3"
+    >
+        Explore All Courses →
+    </a>
+
+{% endif %}
+
+
+            <div class="mt-4">
+
+                <a href="http://localhost:5173/" class="back-link">
+                    ← Return to EGIS Learning
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © {% now "Y" %} EGIS Learning. All Rights Reserved.
+
+</footer>
+
+
+</body>
+</html>

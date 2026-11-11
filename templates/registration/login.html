@@ -1,0 +1,592 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Login | EGIS Learning</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --blue-dark: #075985;
+            --blue: #0284C7;
+            --sky: #38BDF8;
+            --background: #F0F9FF;
+            --text: #0F172A;
+            --muted: #64748B;
+            --border: #DCEAF3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #EAF6FF 55%, #F8FCFF 100%);
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: white;
+            padding: 17px 6%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            background: var(--blue-dark);
+            color: var(--sky);
+            border: 2px solid var(--sky);
+            border-radius: 10px;
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .brand-name {
+            color: var(--blue-dark);
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        .brand-gold {
+            color: var(--sky);
+        }
+
+        .brand small {
+            display: block;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+
+        /* MAIN */
+
+        .main-container {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 460px;
+            background: white;
+            padding: 43px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            box-shadow: 0 18px 55px rgba(7, 89, 133, .10);
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 20px;
+            display: grid;
+            place-items: center;
+            background: #E0F2FE;
+            color: var(--blue-dark);
+            border-radius: 50%;
+            font-size: 30px;
+        }
+
+        .login-heading h1 {
+            color: var(--blue-dark);
+            font-size: 29px;
+            margin: 0 0 10px;
+        }
+
+        .login-heading p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 21px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 9px;
+            color: var(--text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            outline: none;
+            font-size: 14px;
+            transition: .3s;
+            background: white;
+        }
+
+        .form-group input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, .18);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 65px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: var(--blue);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* LOGIN OPTIONS */
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0 24px;
+            gap: 10px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .remember input {
+            accent-color: var(--blue);
+        }
+
+        .forgot {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* BUTTON */
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--blue-dark);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .login-button:hover {
+            background: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 27px 0;
+            color: #9aa69f;
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* GOOGLE */
+
+        .google-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: white;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        .google-button:hover {
+            background: #F8FCFF;
+            border-color: var(--blue);
+        }
+
+        .google-icon {
+            font-size: 19px;
+            font-weight: 900;
+            color: #4285F4;
+        }
+
+        /* ERRORS */
+
+        .error-box {
+            background: #fff0f0;
+            border: 1px solid #ffd5d5;
+            color: #b42318;
+            padding: 13px;
+            border-radius: 7px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* REGISTER */
+
+        .register-text {
+            text-align: center;
+            margin-top: 27px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .register-text a {
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .back-home:hover {
+            color: var(--blue);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        @media(max-width: 500px) {
+
+            .login-wrapper {
+                padding: 30px 22px;
+            }
+
+            .login-heading h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <a href="{% url 'home' %}" class="brand">
+
+            <span class="brand-icon">E</span>
+
+            <span class="brand-name">
+
+                EGIS<span class="brand-gold">LEARNING</span>
+
+                <small>KNOWLEDGE FOR YOUR FUTURE</small>
+
+            </span>
+
+        </a>
+
+    </header>
+
+
+    <!-- LOGIN -->
+
+    <main class="main-container">
+
+        <div class="login-wrapper">
+
+            <div class="login-heading">
+
+                <div class="welcome-icon">
+                    ✦
+                </div>
+
+                <h1>Welcome Back!</h1>
+
+                <p>
+                    Sign in to your EGIS Learning account
+                    and continue your learning journey.
+                </p>
+
+            </div>
+
+
+            {% if form.non_field_errors %}
+
+                <div class="error-box">
+
+                    {% for error in form.non_field_errors %}
+
+                        {{ error }}<br>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            {% if next %}
+
+                {% if user.is_authenticated %}
+
+                    <div class="error-box">
+                        You do not have permission to access that page.
+                    </div>
+
+                {% else %}
+
+                    <p>Please log in to continue.</p>
+
+                {% endif %}
+
+            {% endif %}
+
+
+            <!-- DJANGO LOGIN FORM -->
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.username.id_for_label }}">
+                        Username
+                    </label>
+
+                    {{ form.username }}
+
+                    {% for error in form.username.errors %}
+
+                        <div class="error-box">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.password.id_for_label }}">
+                        Password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        {{ form.password }}
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword()"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ next }}"
+                >
+
+
+                <button type="submit" class="login-button">
+
+                    Sign In to Your Account →
+
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                OR CONTINUE WITH
+            </div>
+
+
+            <!-- GOOGLE LOGIN -->
+
+<form
+    method="post"
+    action="{% provider_login_url 'google' process='login' %}"
+>
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="google-button"
+        style="width: 100%; cursor: pointer; border: none;"
+    >
+
+        <span class="google-icon">G</span>
+
+        Continue with Google
+
+    </button>
+
+</form>
+
+            <!-- REGISTER -->
+
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a href="{% url 'register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+                    Create an account
+                </a>
+
+            </div>
+
+
+            <!-- HOME -->
+
+            <a href="{% url 'home' %}" class="back-home">
+
+                ← Return to EGIS Homepage
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © {{ now.year|default:"2026" }} EGIS Learning.
+        All rights reserved.
+
+        <br>
+
+        Learn. Grow. Achieve.
+
+    </footer>
+
+
+    <script>
+
+        function togglePassword() {
+
+            const password = document.getElementById("id_password");
+
+            const button = document.querySelector(".show-password");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.textContent = "Hide";
+
+            } else {
+
+                password.type = "password";
+
+                button.textContent = "Show";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

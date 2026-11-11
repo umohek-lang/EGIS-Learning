@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Create Account | EGIS Learning</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        /* =========================================
+           PROFESSIONAL LIGHT BLUE COLOUR PALETTE
+        ========================================== */
+
+        :root {
+            --blue-dark: #075985;
+            --blue: #0284C7;
+            --blue-light: #38BDF8;
+            --blue-pale: #E0F2FE;
+            --blue-soft: #F0F9FF;
+
+            --navy: #0F172A;
+            --white: #FFFFFF;
+
+            --text-dark: #172B45;
+            --text-muted: #64748B;
+
+            --border: #DCEAF4;
+            --danger: #DC3545;
+
+            --shadow: 0 20px 60px rgba(15, 75, 120, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+
+            background:
+                radial-gradient(circle at 10% 15%, #D7F0FF 0%, transparent 35%),
+                radial-gradient(circle at 90% 85%, #CDEBFF 0%, transparent 35%),
+                linear-gradient(135deg, #F0F9FF, #E0F2FE 55%, #F8FCFF);
+
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           BACKGROUND DECORATIONS
+        ========================================== */
+
+        .background-circle {
+            position: fixed;
+            border-radius: 50%;
+            border: 1px solid rgba(2, 132, 199, 0.15);
+            pointer-events: none;
+        }
+
+        .circle-one {
+            width: 350px;
+            height: 350px;
+            top: -120px;
+            left: -100px;
+        }
+
+        .circle-two {
+            width: 500px;
+            height: 500px;
+            bottom: -250px;
+            right: -180px;
+        }
+
+        .circle-three {
+            width: 180px;
+            height: 180px;
+            top: 45%;
+            left: 35%;
+            opacity: 0.3;
+        }
+
+        /* =========================================
+           MAIN LAYOUT
+        ========================================== */
+
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 5%;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1250px;
+            min-height: 700px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: rgba(255, 255, 255, 0.85);
+
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow);
+
+            animation: pageAppear 0.8s ease;
+        }
+
+        @keyframes pageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           LEFT SIDE
+        ========================================== */
+
+        .visual-section {
+            position: relative;
+            padding: 55px 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #075985,
+                    #0C4A6E 55%,
+                    #082F49
+                );
+
+            overflow: hidden;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(135deg, #FFFFFF, #BAE6FD);
+
+            color: var(--blue-dark);
+
+            border-radius: 14px;
+
+            font-size: 25px;
+            font-weight: 800;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .brand-name {
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #FFFFFF;
+        }
+
+        .brand-name span {
+            color: #BAE6FD;
+        }
+
+        .visual-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 35px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+
+            padding: 9px 15px;
+
+            border: 1px solid rgba(186, 230, 253, 0.5);
+            border-radius: 30px;
+
+            color: #BAE6FD;
+
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+        }
+
+        .visual-content h1 {
+            font-family: 'Playfair Display', serif;
+
+            font-size: clamp(36px, 4vw, 53px);
+            line-height: 1.2;
+
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        .visual-content h1 span {
+            color: #7DD3FC;
+        }
+
+        .visual-content p {
+            max-width: 420px;
+
+            color: rgba(255, 255, 255, 0.82);
+
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        /* =========================================
+           EDUCATIONAL ILLUSTRATION
+        ========================================== */
+
+        .illustration-area {
+            height: 270px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            margin: 20px 0;
+        }
+
+        .illustration-glow {
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            border-radius: 50%;
+
+            background: rgba(125, 211, 252, 0.2);
+
+            filter: blur(35px);
+        }
+
+        .learning-card {
+            position: relative;
+            z-index: 2;
+
+            width: 245px;
+            height: 185px;
+
+            background: linear-gradient(145deg, #FFFFFF, #E0F2FE);
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0) rotate(-2deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-top strong {
+            color: var(--blue-dark);
+            font-size: 13px;
+        }
+
+        .card-icon {
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #BAE6FD;
+
+            border-radius: 9px;
+
+            color: var(--blue-dark);
+            font-size: 16px;
+        }
+
+        .book-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 7px;
+            height: 100px;
+        }
+
+        .book {
+            width: 48px;
+            height: 65px;
+
+            border-radius: 5px 8px 8px 5px;
+
+            box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.12);
+
+            position: relative;
+        }
+
+        .book-one {
+            background: #0284C7;
+            transform: rotate(-12deg);
+        }
+
+        .book-two {
+            background: #38BDF8;
+            height: 75px;
+            transform: translateY(-7px);
+        }
+
+        .book-three {
+            background: #075985;
+            transform: rotate(12deg);
+        }
+
+        .book::after {
+            content: "";
+
+            position: absolute;
+
+            left: 7px;
+            top: 10px;
+
+            width: 3px;
+            height: 80%;
+
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-progress {
+            height: 6px;
+
+            background: #DCEAF4;
+
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .card-progress span {
+            display: block;
+
+            width: 75%;
+            height: 100%;
+
+            background: linear-gradient(90deg, #0284C7, #38BDF8);
+
+            border-radius: 20px;
+        }
+
+        /* =========================================
+           FLOATING DECORATIONS
+        ========================================== */
+
+        .floating-icon {
+            position: absolute;
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(186, 230, 253, 0.5);
+
+            border-radius: 14px;
+
+            font-size: 23px;
+
+            backdrop-filter: blur(10px);
+
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        .icon-one {
+            top: 15px;
+            left: 35px;
+        }
+
+        .icon-two {
+            right: 20px;
+            top: 35px;
+            animation-delay: 1s;
+        }
+
+        .icon-three {
+            left: 20px;
+            bottom: 15px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .visual-footer {
+            color: rgba(255, 255, 255, 0.65);
+
+            font-size: 12px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .visual-footer span {
+            color: #BAE6FD;
+        }
+
+        /* =========================================
+           RIGHT SIDE / REGISTRATION FORM
+        ========================================== */
+
+        .form-section {
+            background: #FFFFFF;
+
+            color: var(--text-dark);
+
+            padding: 50px 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 28px;
+        }
+
+        .form-heading .small-label {
+            color: var(--blue);
+
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            margin-bottom: 12px;
+        }
+
+        .form-heading h2 {
+            font-family: 'Playfair Display', serif;
+
+            font-size: 35px;
+
+            color: var(--blue-dark);
+
+            margin-bottom: 9px;
+        }
+
+        .form-heading p {
+            color: var(--text-muted);
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           FORM FIELDS
+        ========================================== */
+
+        .registration-form {
+            width: 100%;
+        }
+
+        .field-group {
+            margin-bottom: 17px;
+
+            animation: fieldAppear 0.6s ease both;
+        }
+
+        .field-group:nth-child(2) {
+            animation-delay: 0.08s;
+        }
+
+        .field-group:nth-child(3) {
+            animation-delay: 0.16s;
+        }
+
+        @keyframes fieldAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .field-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            color: #334155;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .field-group input {
+            width: 100%;
+            height: 49px;
+
+            padding: 0 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            outline: none;
+
+            background: #F8FCFF;
+
+            color: var(--text-dark);
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .field-group input:focus {
+            border-color: var(--blue);
+
+            background: #FFFFFF;
+
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+        }
+
+        .field-group input::placeholder {
+            color: #94A3B8;
+        }
+
+        .password-input {
+            padding-right: 75px !important;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: var(--blue-dark);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .helptext {
+            display: block;
+
+            margin-top: 7px;
+
+            color: var(--text-muted);
+
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .helptext ul {
+            padding-left: 18px;
+            margin-top: 5px;
+        }
+
+        .errorlist {
+            list-style: none;
+
+            color: var(--danger);
+
+            font-size: 12px;
+
+            margin-top: 6px;
+        }
+
+        .field-error {
+            color: var(--danger);
+
+            font-size: 12px;
+
+            margin-top: 6px;
+        }
+
+        .non-field-errors {
+            background: #FFF1F2;
+
+            color: var(--danger);
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+        }
+
+        /* =========================================
+           PASSWORD STRENGTH
+        ========================================== */
+
+        .strength-container {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .strength-bars {
+            display: flex;
+
+            gap: 5px;
+
+            margin-bottom: 6px;
+        }
+
+        .strength-bars span {
+            flex: 1;
+
+            height: 5px;
+
+            background: #E2E8F0;
+
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+        .strength-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           SUBMIT BUTTON
+        ========================================== */
+
+        .submit-button {
+            width: 100%;
+            min-height: 52px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: linear-gradient(110deg, #075985, #0284C7);
+
+            color: #FFFFFF;
+
+            font-family: 'DM Sans', sans-serif;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 12px;
+
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.2);
+
+            transition: 0.3s;
+
+            position: relative;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 25px rgba(2, 132, 199, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-content {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+        }
+
+        /* =========================================
+           LOADING SPINNER
+        ========================================== */
+
+        .spinner {
+            width: 21px;
+            height: 21px;
+
+            border: 3px solid rgba(255, 255, 255, 0.3);
+
+            border-top-color: #BAE6FD;
+            border-right-color: #FFFFFF;
+
+            border-radius: 50%;
+
+            display: none;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================================
+           BOTTOM LINKS
+        ========================================== */
+
+        .form-bottom {
+            text-align: center;
+
+            margin-top: 24px;
+
+            font-size: 13px;
+
+            color: var(--text-muted);
+
+            line-height: 2;
+        }
+
+        .form-bottom a {
+            color: var(--blue);
+
+            text-decoration: none;
+
+            font-weight: 800;
+        }
+
+        .form-bottom a:hover {
+            color: var(--blue-dark);
+            text-decoration: underline;
+        }
+
+        .homepage-link {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .security-note {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 23px;
+
+            color: #94A3B8;
+
+            font-size: 11px;
+        }
+
+        .security-note span {
+            color: var(--blue);
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN
+        ========================================== */
+
+        @media (max-width: 950px) {
+
+            .main-container {
+                grid-template-columns: 0.85fr 1.15fr;
+            }
+
+            .visual-section {
+                padding: 40px 30px;
+            }
+
+            .form-section {
+                padding: 40px 35px;
+            }
+
+            .visual-content h1 {
+                font-size: 38px;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .page-wrapper {
+                padding: 15px;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+
+                max-width: 520px;
+
+                border-radius: 18px;
+            }
+
+            .visual-section {
+                padding: 30px 25px 15px;
+            }
+
+            .visual-content {
+                margin-top: 30px;
+            }
+
+            .visual-content h1 {
+                font-size: 34px;
+            }
+
+            .visual-content p {
+                font-size: 13px;
+            }
+
+            .illustration-area {
+                height: 190px;
+                margin: 10px 0;
+            }
+
+            .learning-card {
+                transform: scale(0.85);
+            }
+
+            .visual-footer {
+                display: none;
+            }
+
+            .form-section {
+                padding: 35px 25px;
+            }
+
+            .form-heading h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .form-section {
+                padding: 30px 18px;
+            }
+
+            .visual-section {
+                padding: 25px 20px;
+            }
+
+            .visual-content h1 {
+                font-size: 29px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- BACKGROUND DECORATIONS -->
+
+    <div class="background-circle circle-one"></div>
+    <div class="background-circle circle-two"></div>
+    <div class="background-circle circle-three"></div>
+
+    <div class="page-wrapper">
+
+        <div class="main-container">
+
+            <!-- =================================
+                 LEFT VISUAL SECTION
+            ================================== -->
+
+            <section class="visual-section">
+
+                <div class="brand">
+
+                    <div class="brand-logo">
+                        E
+                    </div>
+
+                    <div class="brand-name">
+                        EGIS <span>LEARNING</span>
+                    </div>
+
+                </div>
+
+                <div class="visual-content">
+
+                    <div class="eyebrow">
+                        Learn. Grow. Succeed.
+                    </div>
+
+                    <h1>
+                        Your Future Begins With
+                        <span>Knowledge.</span>
+                    </h1>
+
+                    <p>
+                        Join a community of ambitious learners.
+                        Discover practical courses, develop valuable
+                        skills and build the future you deserve.
+                    </p>
+
+                    <!-- EDUCATIONAL ILLUSTRATION -->
+
+                    <div class="illustration-area">
+
+                        <div class="illustration-glow"></div>
+
+                        <div class="floating-icon icon-one">
+                            ✦
+                        </div>
+
+                        <div class="floating-icon icon-two">
+                            🎓
+                        </div>
+
+                        <div class="floating-icon icon-three">
+                            ✧
+                        </div>
+
+                        <div class="learning-card">
+
+                            <div class="card-top">
+
+                                <strong>
+                                    Your Learning Journey
+                                </strong>
+
+                                <div class="card-icon">
+                                    ✓
+                                </div>
+
+                            </div>
+
+                            <div class="book-illustration">
+
+                                <div class="book book-one"></div>
+                                <div class="book book-two"></div>
+                                <div class="book book-three"></div>
+
+                            </div>
+
+                            <div class="card-progress">
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="visual-footer">
+
+                    Empowering learners through technology.
+
+                    <span>© EGIS Learning</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 RIGHT REGISTRATION FORM
+            ================================== -->
+
+            <section class="form-section">
+
+                <div class="form-heading">
+
+                    <div class="small-label">
+                        Start your journey
+                    </div>
+
+                    <h2>
+                        Create Account
+                    </h2>
+
+                    <p>
+                        Join EGIS Learning and start developing
+                        new skills today.
+                    </p>
+
+                </div>
+
+
+                <!-- REGISTRATION FORM -->
+
+                <form method="post"
+                      class="registration-form"
+                      id="registrationForm">
+
+                    {% csrf_token %}
+
+                    <!-- PRESERVE ORIGINAL DESTINATION -->
+
+                    <input type="hidden"
+                           name="next"
+                           value="{{ next }}">
+
+
+                    <!-- NON-FIELD ERRORS -->
+
+                    {% if form.non_field_errors %}
+
+                        <div class="non-field-errors">
+
+                            {% for error in form.non_field_errors %}
+
+                                <p>{{ error }}</p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- DJANGO REGISTRATION FIELDS -->
+
+                    {% for field in form %}
+
+                        <div class="field-group">
+
+                            <label for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                {{ field }}
+
+                            </div>
+
+                            {% if field.help_text %}
+
+                                <div class="helptext">
+                                    {{ field.help_text|safe }}
+                                </div>
+
+                            {% endif %}
+
+
+                            {% for error in field.errors %}
+
+                                <div class="field-error">
+                                    {{ error }}
+                                </div>
+
+                            {% endfor %}
+
+
+                            <!-- PASSWORD STRENGTH INDICATOR -->
+
+                            {% if field.name == "password1" %}
+
+                                <div class="strength-container"
+                                     id="strengthContainer">
+
+                                    <div class="strength-bars">
+
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+
+                                    </div>
+
+                                    <div class="strength-label"
+                                         id="strengthLabel">
+
+                                        Password strength
+
+                                    </div>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+
+                    <!-- SUBMIT BUTTON -->
+
+                    <button type="submit"
+                            class="submit-button"
+                            id="submitButton">
+
+                        <span class="button-content"
+                              id="buttonContent">
+
+                            <span id="buttonText">
+                                Create My Account
+                            </span>
+
+                            <span class="spinner"
+                                  id="loadingSpinner"></span>
+
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- BOTTOM LINKS -->
+
+                <div class="form-bottom">
+
+                    Already have an account?
+
+                    <a href="{% url 'login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+                        Log In
+                    </a>
+
+                    <br>
+
+                    <a href="{% url 'home' %}"
+                       class="homepage-link">
+
+                        ← Return to Homepage
+
+                    </a>
+
+                </div>
+
+
+                <!-- SECURITY NOTE -->
+
+                <div class="security-note">
+
+                    <span>🔒</span>
+
+                    Your information is protected and secure.
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT FUNCTIONALITY
+    ========================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            /* =================================
+               PASSWORD VISIBILITY
+            ================================== */
+
+            const passwordFields = document.querySelectorAll(
+                'input[type="password"]'
+            );
+
+            passwordFields.forEach(function (input) {
+
+                input.classList.add("password-input");
+
+                const wrapper = input.parentElement;
+
+                const toggle = document.createElement("button");
+
+                toggle.type = "button";
+
+                toggle.className = "password-toggle";
+
+                toggle.textContent = "Show";
+
+                toggle.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+                toggle.addEventListener("click", function () {
+
+                    if (input.type === "password") {
+
+                        input.type = "text";
+
+                        toggle.textContent = "Hide";
+
+                        toggle.setAttribute(
+                            "aria-label",
+                            "Hide password"
+                        );
+
+                    } else {
+
+                        input.type = "password";
+
+                        toggle.textContent = "Show";
+
+                        toggle.setAttribute(
+                            "aria-label",
+                            "Show password"
+                        );
+
+                    }
+
+                });
+
+                wrapper.appendChild(toggle);
+
+            });
+
+
+            /* =================================
+               PASSWORD STRENGTH
+            ================================== */
+
+            const passwordInput = document.getElementById(
+                "id_password1"
+            );
+
+            const strengthContainer = document.getElementById(
+                "strengthContainer"
+            );
+
+            const strengthLabel = document.getElementById(
+                "strengthLabel"
+            );
+
+            const strengthBars = document.querySelectorAll(
+                ".strength-bars span"
+            );
+
+
+            if (passwordInput && strengthContainer) {
+
+                passwordInput.addEventListener("input", function () {
+
+                    const password = passwordInput.value;
+
+                    strengthContainer.style.display =
+                        password.length > 0 ? "block" : "none";
+
+
+                    let score = 0;
+
+
+                    if (password.length >= 8) {
+                        score++;
+                    }
+
+                    if (
+                        /[a-z]/.test(password) &&
+                        /[A-Z]/.test(password)
+                    ) {
+                        score++;
+                    }
+
+                    if (/[0-9]/.test(password)) {
+                        score++;
+                    }
+
+                    if (/[^A-Za-z0-9]/.test(password)) {
+                        score++;
+                    }
+
+
+                    const labels = [
+                        "Weak password",
+                        "Fair password",
+                        "Good password",
+                        "Strong password",
+                        "Very strong password"
+                    ];
+
+
+                    strengthLabel.textContent = labels[score];
+
+
+                    strengthBars.forEach(function (bar, index) {
+
+                        bar.style.background = "#E2E8F0";
+
+                        if (index < score) {
+
+                            if (score <= 1) {
+
+                                bar.style.background = "#DC3545";
+
+                            } else if (score === 2) {
+
+                                bar.style.background = "#E9A23B";
+
+                            } else if (score === 3) {
+
+                                bar.style.background = "#0284C7";
+
+                            } else {
+
+                                bar.style.background = "#075985";
+
+                            }
+
+                        }
+
+                    });
+
+                });
+
+            }
+
+
+            /* =================================
+               LOADING SPINNER
+            ================================== */
+
+            const registrationForm = document.getElementById(
+                "registrationForm"
+            );
+
+            const submitButton = document.getElementById(
+                "submitButton"
+            );
+
+            const buttonText = document.getElementById(
+                "buttonText"
+            );
+
+            const loadingSpinner = document.getElementById(
+                "loadingSpinner"
+            );
+
+
+            registrationForm.addEventListener("submit", function () {
+
+                submitButton.disabled = true;
+
+                buttonText.textContent = "Creating Your Account...";
+
+                loadingSpinner.style.display = "inline-block";
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

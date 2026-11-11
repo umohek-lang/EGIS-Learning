@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGIS | Learn Skills That Move You Forward</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #172033;
+            background: #f7f9fc;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px 7%;
+            background: white;
+            border-bottom: 1px solid #e7eaf0;
+        }
+        .brand { font-size: 25px; font-weight: 800; color: #123d2b; }
+        nav { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        a { color: inherit; text-decoration: none; }
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 8px;
+            background: #126b45;
+            color: white;
+            font-weight: bold;
+        }
+        .hero {
+            padding: 75px 7%;
+            color: white;
+            background: linear-gradient(120deg, #103c2c, #167b53);
+        }
+        .hero h1 { max-width: 750px; font-size: clamp(35px, 5vw, 58px); margin: 0 0 20px; }
+        .hero p { max-width: 650px; line-height: 1.8; font-size: 18px; }
+        main { padding: 45px 7%; }
+        .section-heading { margin-bottom: 25px; }
+        .categories, .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+        .category, .course {
+            background: white;
+            border-radius: 13px;
+            overflow: hidden;
+            border: 1px solid #e8ebf0;
+        }
+        .category { padding: 22px; }
+        .course img { width: 100%; height: 175px; object-fit: cover; }
+        .course-content { padding: 20px; }
+        .course h3 { margin-top: 8px; }
+        .muted { color: #657087; line-height: 1.6; }
+        .level { color: #126b45; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+        .preview { margin-top: 14px; display: inline-block; color: #126b45; font-weight: bold; }
+        footer { text-align: center; padding: 30px; background: #102f24; color: white; }
+        @media (max-width: 600px) {
+            header { align-items: flex-start; flex-direction: column; }
+            .hero { padding-top: 50px; padding-bottom: 50px; }
+        }
+
+/* CATEGORY CARDS */
+
+.category {
+    padding: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.category img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    display: block;
+}
+
+.category-content {
+    padding: 20px;
+}
+
+
+/* ADVERTISEMENT SECTION */
+
+.advertisement-section {
+    margin-top: 55px;
+    margin-bottom: 55px;
+}
+
+.advertisement {
+    position: relative;
+    display: block;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #103c2c;
+}
+
+.advertisement img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+.advertisement-content {
+    padding: 20px;
+    background: #ffffff;
+}
+
+.advertisement-content h3 {
+    margin-top: 0;
+    color: #103c2c;
+}
+
+.advertisement-content p {
+    color: #657087;
+}
+
+.advertisement-label {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+@media(max-width:600px) {
+
+    .advertisement img {
+        height: 180px;
+    }
+
+    .category img {
+        height: 160px;
+    }
+
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <a class="brand" href="/">EGIS LEARNING</a>
+    <nav>
+        <a href="#categories">Categories</a>
+        <a href="#courses">Courses</a>
+        <a href="/admin/">Admin</a>
+        <a class="button" href="/accounts/login/">Log in</a>
+        <a href="{% url 'training_list' %}">Our Trainings</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Learn new skills. Build your future.</h1>
+    <p>
+        Explore practical courses for beginners, intermediate learners,
+        and advanced professionals. Preview a course and subscribe to
+        unlock the full learning experience.
+    </p>
+    <a class="button" href="#courses">Explore Courses</a>
+
+    <a class="button" href="{% url 'training_list' %}">
+        Explore All Trainings →
+    </a>
+
+</section>
+
+<main>
+
+<!-- ADVERTISEMENT SECTION -->
+
+{% if advertisements %}
+
+<section class="advertisement-section">
+
+    <div class="section-heading">
+
+        <h2>Promotions & Opportunities</h2>
+
+        <p class="muted">
+            Discover exciting learning opportunities and programmes.
+        </p>
+
+    </div>
+
+    {% for ad in advertisements %}
+
+        <div class="advertisement">
+
+            {% if ad.target_url %}
+
+                <a
+                    href="{{ ad.target_url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+            {% endif %}
+
+                <span class="advertisement-label">
+                    ADVERTISEMENT
+                </span>
+
+                <img
+                    src="{{ ad.image.url }}"
+                    alt="{{ ad.title }}"
+                >
+
+                {% if ad.title or ad.description %}
+
+                    <div class="advertisement-content">
+
+                        <h3>{{ ad.title }}</h3>
+
+                        {% if ad.description %}
+
+                            <p>{{ ad.description }}</p>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+            {% if ad.target_url %}
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
+
+</section>
+
+{% endif %}
+
+
+
+
+
+
+
+
+    <section id="categories">
+
+        <div class="section-heading">
+            <h2>Explore Categories</h2>
+    
+            <p class="muted">
+                Find learning opportunities in your area of interest.
+            </p>
+        </div>
+    
+        <div class="categories">
+    
+            {% for category in categories %}
+    
+                <article class="category">
+    
+                    {% if category.image %}
+    
+                        <img
+                            src="{{ category.image.url }}"
+                            alt="{{ category.name }}"
+                        >
+    
+                    {% else %}
+    
+                        <div style="
+                            height:175px;
+                            background:#dcebe3;
+                            display:grid;
+                            place-items:center;
+                            color:#126b45;
+                            font-weight:bold;
+                        ">
+                            {{ category.name }}
+                        </div>
+    
+                    {% endif %}
+    
+                    <div class="category-content">
+
+                        <h3>{{ category.name }}</h3>
+                    
+                        <p class="muted">
+                            {{ category.description|default:"Explore courses in this category." }}
+                        </p>
+                    
+                        <a class="button"
+                           href="{% url 'category_courses' category.slug %}">
+                            View Courses →
+                        </a>
+                    
+                    </div>
+    
+                </article>
+    
+            {% empty %}
+    
+                <p>No categories available yet.</p>
+    
+            {% endfor %}
+    
+        </div>
+    
+    </section>
+
+
+    
+
+    <section id="courses" style="margin-top: 55px;">
+        <div class="section-heading">
+            <h2>Featured Courses</h2>
+            <p class="muted">Preview courses before choosing your subscription.</p>
+        </div>
+
+        <div class="courses">
+            {% for course in courses %}
+                <article class="course">
+                    {% if course.thumbnail %}
+                        <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}">
+                    {% else %}
+                        <div style="height:175px;background:#dcebe3;display:grid;place-items:center;color:#126b45;font-weight:bold;">
+                            EGIS COURSE
+                        </div>
+                    {% endif %}
+
+                    <div class="course-content">
+                        <span class="level">{{ course.get_level_display }}</span>
+                        <h3>{{ course.title }}</h3>
+                        <p class="muted">{{ course.description|truncatewords:22 }}</p>
+                        <p class="muted">Category: {{ course.category.name }}</p>
+                        <a class="preview" href="{% url 'course_detail' course.slug %}">View course →</a>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No published courses yet. Create a course and publish it in Django Admin.</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© {% now "Y" %} EGIS Learning. Learn at your own pace.</p>
+</footer>
+
+</body>
+</html>

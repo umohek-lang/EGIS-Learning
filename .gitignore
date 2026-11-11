@@ -1,0 +1,52 @@
+# Django environment
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite databases and backups
+*.sqlite3
+*.sqlite3-journal
+*.db
+
+# User uploaded files - store separately
+media/
+private_media/
+EGIS_VIDEO_BACKUP/
+EGIS_VIDEO_PUBLIC_HOLD/
+
+# React dependencies
+frontend/node_modules/
+node_modules/
+
+# React production builds
+frontend/dist/
+frontend/build/
+
+# Django generated files
+staticfiles/
+collected_static/
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak

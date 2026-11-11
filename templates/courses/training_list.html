@@ -1,0 +1,915 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Trainings | EGIS Learning</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #1685c5;
+            --primary-dark: #08699f;
+            --navy: #123b5d;
+            --light-blue: #eaf6ff;
+            --pale-blue: #f3f9ff;
+            --text: #243b53;
+            --muted: #718096;
+            --white: #ffffff;
+            --border: #dcebf7;
+            --gold: #e6ad45;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f6faff;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        header {
+            background: rgba(255,255,255,0.97);
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(20,80,120,0.04);
+        }
+
+        .brand {
+            font-size: 25px;
+            font-weight: 900;
+            color: var(--navy);
+            letter-spacing: -1px;
+        }
+
+        .brand span {
+            color: var(--primary);
+        }
+
+        .brand small {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: #8196aa;
+            font-weight: 700;
+            margin-top: -5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 650;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav .nav-register {
+            background: var(--primary);
+            color: white;
+            padding: 11px 23px;
+            border-radius: 7px;
+        }
+
+        nav .nav-register:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+
+        .hero {
+            background:
+                radial-gradient(circle at 85% 20%, rgba(255,255,255,0.15), transparent 25%),
+                linear-gradient(120deg, #123b5d, #1685c5);
+
+            color: white;
+            padding: 100px 7%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            right: -100px;
+            top: -160px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            display: inline-block;
+            color: #d6efff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #bce7ff;
+        }
+
+        .hero p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #e1f2ff;
+            max-width: 720px;
+            margin-bottom: 30px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-dark);
+            padding: 15px 28px;
+            border-radius: 8px;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #d9f0ff;
+            transform: translateY(-3px);
+            color: var(--navy);
+        }
+
+        /* =========================
+           TRUST STRIP
+        ========================= */
+
+        .trust-strip {
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 28px 7%;
+            gap: 20px;
+            box-shadow: 0 8px 25px rgba(20,80,120,0.04);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .trust-icon {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: var(--light-blue);
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .trust-item strong {
+            display: block;
+            font-size: 14px;
+            color: var(--navy);
+        }
+
+        .trust-item small {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        main {
+            padding: 75px 7%;
+        }
+
+        .section {
+            margin-bottom: 85px;
+        }
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .section-heading h2 {
+            color: var(--navy);
+            font-size: clamp(27px, 3vw, 38px);
+            font-weight: 900;
+            margin: 10px 0;
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            max-width: 750px;
+            font-size: 15px;
+        }
+
+        /* =========================
+           CATEGORY AND COURSE GRID
+        ========================= */
+
+        .categories,
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 27px;
+        }
+
+        .category,
+        .course {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 5px 20px rgba(20,80,120,0.04);
+            transition: 0.3s ease;
+        }
+
+        .category:hover,
+        .course:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(22,133,197,0.13);
+            border-color: #a8d9f5;
+        }
+
+        .category img,
+        .course img {
+            width: 100%;
+            height: 205px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .category-placeholder,
+        .course-placeholder {
+            height: 205px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #d9efff, #a9dafa);
+            color: var(--navy);
+            font-size: 23px;
+            font-weight: 900;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .content h3 {
+            color: var(--navy);
+            font-size: 20px;
+            font-weight: 850;
+            margin-bottom: 12px;
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background: var(--light-blue);
+            color: var(--primary-dark);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        /* =========================
+           COURSE DETAILS
+        ========================= */
+
+        .course-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 17px 0;
+        }
+
+        .course-info span {
+            background: #f0f7fd;
+            color: #54718b;
+            padding: 6px 11px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-top: 12px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           EMPTY STATES
+        ========================= */
+
+        .empty-state {
+            background: white;
+            border: 1px dashed #acd5ef;
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+            color: var(--muted);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            display: block;
+            font-size: 35px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           CALL TO ACTION
+        ========================= */
+
+        .cta-section {
+            margin: 0 7% 75px;
+            padding: 55px 35px;
+            border-radius: 18px;
+            text-align: center;
+            background: linear-gradient(120deg, #dff2ff, #f0f8ff);
+            border: 1px solid #c9e8fa;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            color: var(--muted);
+            max-width: 650px;
+            margin: 0 auto 22px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #102f4a;
+            color: white;
+            padding: 35px 7% 20px;
+            text-align: center;
+        }
+
+        footer strong {
+            color: #a9ddfa;
+        }
+
+        footer p {
+            color: #d1e2ef;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+
+        @media(max-width: 900px) {
+
+            .trust-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                padding: 18px 5%;
+            }
+
+            main {
+                padding: 60px 5%;
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 70px 6%;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .trust-strip {
+                grid-template-columns: 1fr;
+                padding: 25px 7%;
+            }
+
+            .section {
+                margin-bottom: 60px;
+            }
+
+            .categories,
+            .courses {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                margin: 0 5% 55px;
+                padding: 40px 22px;
+            }
+
+            .cta-section h2 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header>
+
+    <a href="/" class="brand">
+        EGIS<span>LEARNING</span>
+        <small>KNOWLEDGE FOR YOUR FUTURE</small>
+    </a>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="{% url 'training_list' %}">Trainings</a>
+
+        <a href="/accounts/login/">Login</a>
+
+        <a href="/accounts/register/" class="nav-register">
+            Get Started
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            ✦ EMPOWERING MINDS. DEVELOPING SKILLS. SHAPING FUTURES.
+        </span>
+
+        <h1>
+            Discover Knowledge.
+            <span>Develop Your Potential.</span>
+        </h1>
+
+        <p>
+            Explore professionally structured training programmes
+            designed to strengthen your knowledge, develop practical
+            competencies and prepare you for meaningful opportunities
+            in today's evolving digital and professional world.
+        </p>
+
+        <!-- <a href="#available-courses" class="hero-button">
+            Explore Our Courses &nbsp; →
+        </a> -->
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRUST SECTION
+========================= -->
+
+<section class="trust-strip">
+
+    <div class="trust-item">
+
+        <div class="trust-icon">
+            <i class="bi bi-mortarboard"></i>
+        </div>
+
+        <div>
+            <strong>Practical Education</strong>
+            <small>Knowledge for real-world application</small>
+        </div>
+
+    </div>
+
+    <div class="trust-item">
+
+        <div class="trust-icon">
+            <i class="bi bi-person-workspace"></i>
+        </div>
+
+        <div>
+            <strong>Expert Instruction</strong>
+            <small>Structured professional learning</small>
+        </div>
+
+    </div>
+
+    <div class="trust-item">
+
+        <div class="trust-icon">
+            <i class="bi bi-clock-history"></i>
+        </div>
+
+        <div>
+            <strong>Flexible Learning</strong>
+            <small>Study at your convenience</small>
+        </div>
+
+    </div>
+
+    <div class="trust-item">
+
+        <div class="trust-icon">
+            <i class="bi bi-award"></i>
+        </div>
+
+        <div>
+            <strong>Learning Achievement</strong>
+            <small>Build and demonstrate your skills</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<main>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                EXPLORE YOUR INTERESTS
+            </span>
+
+            <h2>Discover Our Learning Categories</h2>
+
+            <p>
+                Find your area of interest and explore carefully
+                organised learning opportunities designed to help
+                you acquire relevant knowledge and professional skills.
+            </p>
+
+        </div>
+
+
+        <div class="categories">
+
+            {% for category in categories %}
+
+                <article class="category">
+
+                    {% if category.image %}
+
+                        <img
+                            src="{{ category.image.url }}"
+                            alt="{{ category.name }}"
+                        >
+
+                    {% else %}
+
+                        <div class="category-placeholder">
+
+                            {{ category.name }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="content">
+
+                        <span class="category-tag">
+                            LEARNING CATEGORY
+                        </span>
+
+                        <h3>{{ category.name }}</h3>
+
+                        <p class="muted">
+                            {{ category.description|default:"Explore our professionally structured training programmes and develop valuable knowledge and practical competencies." }}
+                        </p>
+
+                        <a
+                            class="button"
+                            href="{% url 'category_courses' category.slug %}"
+                        >
+                            Explore Courses <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-state">
+
+                    <i class="bi bi-journal-bookmark"></i>
+
+                    <strong>No learning categories available yet.</strong>
+
+                    <p>Please check back soon for new learning opportunities.</p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ALL COURSES
+    ========================= -->
+
+    <section class="section" id="available-courses">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                ADVANCE YOUR KNOWLEDGE
+            </span>
+
+            <h2>Explore Our Available Trainings</h2>
+
+            <p>
+                Discover practical courses designed to expand your
+                capabilities, strengthen your professional profile
+                and support continuous personal development.
+            </p>
+
+        </div>
+
+
+        <div class="courses">
+
+            {% for course in courses %}
+
+                <article class="course">
+
+                    {% if course.thumbnail %}
+
+                        <img
+                            src="{{ course.thumbnail.url }}"
+                            alt="{{ course.title }}"
+                        >
+
+                    {% else %}
+
+                        <div class="course-placeholder">
+                            EGIS LEARNING
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="content">
+
+                        <span class="category-tag">
+                            {{ course.category.name }}
+                        </span>
+
+                        <h3>{{ course.title }}</h3>
+
+                        <p class="muted">
+                            {{ course.description|truncatewords:25 }}
+                        </p>
+
+
+                        <div class="course-info">
+
+                            <span>
+                                <i class="bi bi-bar-chart"></i>
+                                {{ course.get_level_display }}
+                            </span>
+
+                            <span>
+                                <i class="bi bi-laptop"></i>
+                                Online Learning
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            class="button"
+                            href="{% url 'course_detail' course.slug %}"
+                        >
+                            View Course Details
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="empty-state">
+
+                    <i class="bi bi-book"></i>
+
+                    <strong>No published courses available yet.</strong>
+
+                    <p>New training programmes will appear here once published.</p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================
+     CALL TO ACTION
+========================= -->
+
+<section class="cta-section">
+
+    <span class="section-label">
+        YOUR NEXT CHAPTER STARTS HERE
+    </span>
+
+    <h2>Invest in Knowledge. Unlock Your Potential.</h2>
+
+    <p>
+        Take the next step towards your personal and professional
+        ambitions. Join EGIS Learning and begin developing the
+        knowledge and competencies that can create new opportunities.
+    </p>
+
+    <a href="/accounts/register/" class="button">
+        Join EGIS Learning <i class="bi bi-arrow-right"></i>
+    </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        <strong>EGIS LEARNING</strong>
+    </p>
+
+    <p>
+        Empowering minds through knowledge, practical education
+        and continuous professional development.
+    </p>
+
+    <p>
+        © {% now "Y" %} EGIS Learning. All Rights Reserved.
+    </p>
+
+    <p>
+        Learn. Develop. Excel.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

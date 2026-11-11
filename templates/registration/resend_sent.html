@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Check Your Email | EGIS Learning</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f7f5;
+            padding: 30px;
+            margin: 0;
+        }
+
+        main {
+            max-width: 520px;
+            margin: 60px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        h1 {
+            color: #126b45;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        a {
+            color: #126b45;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <h1>Check Your Email</h1>
+
+    <p>
+        If an account needs verification, an email will be sent
+        with further instructions.
+    </p>
+
+    <p>
+        Please check your inbox and Spam folder.
+    </p>
+
+    <p>
+        <a href="{% url 'login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+            Return to login
+        </a>
+    </p>
+
+</main>
+
+</body>
+</html>
