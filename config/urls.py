@@ -1,20 +1,20 @@
 from django.contrib import admin
 from django.urls import include, path, re_path
-# from django.views.generic import RedirectView
+from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
 
-       # Redirect Django homepage to React frontend
-    # re_path(
-    #     r'^$',
-    #     RedirectView.as_view(
-    #         url='http://localhost:5173/',
-    #         permanent=False
-    #     ),
-    #     name='frontend_home'
-    # ),
+     # Redirect Django homepage to React frontend
+     re_path(
+         r'^$',
+         RedirectView.as_view(
+             url='http://localhost:5173/',
+             permanent=False
+         ),
+         name='frontend_home'
+    ),
 
      # Django admin
     path("admin/", admin.site.urls),
