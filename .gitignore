@@ -50,3 +50,9 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.bak
+
+# Old frontend backup
+frontend/backup_before_professional_design/
+
+# Temporary HTML demonstration
+table.html

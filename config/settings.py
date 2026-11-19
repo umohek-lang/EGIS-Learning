@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY is missing")
 
-DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -31,10 +31,21 @@ DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 # ]
 
 
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    "127.0.0.1,localhost,10.168.80.141"
-).split(",")
+# ALLOWED_HOSTS = os.getenv(
+#     "ALLOWED_HOSTS",
+#     "127.0.0.1,localhost,10.168.80.141"
+# ).split(",")
+
+
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "ALLOWED_HOSTS",
+        "127.0.0.1,localhost,10.168.80.141"
+    ).split(",")
+    if host.strip()
+]
 
 # Application definition
 
@@ -73,7 +84,8 @@ AUTH_USER_MODEL = "accounts.User"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,7 +163,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 
@@ -202,7 +215,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
 
 TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
 
@@ -330,14 +343,17 @@ CSRF_TRUSTED_ORIGINS = [
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-if not DEBUG:
 
+
+if not DEBUG:
     SECURE_SSL_REDIRECT = True
 
     SESSION_COOKIE_SECURE = True
-
     CSRF_COOKIE_SECURE = True
 
     SECURE_CONTENT_TYPE_NOSNIFF = True
-
     X_FRAME_OPTIONS = "DENY"
+
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
