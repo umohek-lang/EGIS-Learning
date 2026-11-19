@@ -174,7 +174,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -215,7 +215,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
 
 TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
 
@@ -311,11 +311,11 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
 
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://10.168.80.141:5173",
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://localhost:5173",
+#     "http://127.0.0.1:5173",
+#     "http://10.168.80.141:5173",
+# ]
 
 
 CORS_ALLOWED_ORIGINS = [
